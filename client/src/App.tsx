@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormState } from './hooks/useFormState';
 import { useSelectedValues } from './hooks/useSelectedValues';
 import { AdPopover } from './components/AdPopover';
+import { featureFlags } from './config/MultiModeFlag';
 
 const App: React.FC = () => {
   const { formData, handleInputChange, setFormData } = useFormState();
@@ -71,7 +72,7 @@ const App: React.FC = () => {
           { label: 'Option 3', value: '3' },
           { label: 'Option 4', value: '4' },
         ]}
-        isMulti //!isMulti = <SingleModePopover/>;  isMulti = <MultiModePopover/>
+        isMulti={featureFlags.isMulti} //!isMulti = <SingleModePopover/>;  isMulti = <MultiModePopover/>
         placeholder="Select options"
         selectedValues={selectedValues}
         setSelectedValues={setSelectedValues} 
