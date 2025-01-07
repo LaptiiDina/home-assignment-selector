@@ -1,39 +1,81 @@
 import React from 'react';
-import { useForm} from 'react-hook-form';
-import { SelectPopover } from './components/SelectPopover';
-import { FormValues } from './types';
-
+import { useFormState } from './hooks/useFormState';
+import { useSelectedValues } from './hooks/useSelectedValues';
+import { AdPopover } from './components/AdPopover';
 
 const App: React.FC = () => {
-  const {
-    handleSubmit,
-    control,
-    register,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const { formData, handleInputChange, setFormData } = useFormState();
 
-  const onSubmit = (data: FormValues) => {
-    console.log('Form Data:', data);
+  const {
+    selectedValues,
+    clearValues,
+    setSelectedValues, 
+  } = useSelectedValues();
+
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form Data:', {
+      ...formData,
+      selectedOptions: selectedValues,
+    });
+    clearValues();
+    setFormData({name: '', email: ''})
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 10, width: 400 }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+        width: 400,
+      }}
+    >
+
       <input
-        {...register('name', { required: 'Name is required' })}
+        required
+        name="name"
+        value={formData.name}
+        onChange={handleInputChange}
         type="text"
         placeholder="Name"
-        style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
+        style={{
+          padding: '5px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
       />
-      {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+
+
       <input
-        {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' } })}
+        required
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
         type="email"
         placeholder="Email"
-        style={{ padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }}
+        style={{
+          padding: '5px',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
       />
-      {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
 
-      <SelectPopover control={control}/>
+
+      <AdPopover
+        options={[
+          { label: 'Option 1', value: '1' },
+          { label: 'Option 2', value: '2' },
+          { label: 'Option 3', value: '3' },
+          { label: 'Option 4', value: '4' },
+        ]}
+        isMulti //!isMulti = <SingleModePopover/>;  isMulti = <MultiModePopover/>
+        placeholder="Select options"
+        selectedValues={selectedValues}
+        setSelectedValues={setSelectedValues} 
+      />
 
       <button
         type="submit"
