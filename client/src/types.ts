@@ -14,7 +14,7 @@ export interface FormData {
   name: string;
   email: string;
 }
-  //setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
 
 export interface MultiModePopoverProps  {
     placeholder: string;

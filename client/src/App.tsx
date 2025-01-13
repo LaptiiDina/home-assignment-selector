@@ -5,9 +5,9 @@ import { AdPopover } from './components/AdPopover';
 import { featureFlags } from './config/MultiModeFlag';
 
 const App: React.FC = () => {
-  const { formData, handleInputChange, setFormData } = useFormState();
+   const { formData, handleInputChange, setFormData } = useFormState();
 
-  const {
+   const {
     selectedValues,
     clearValues,
     setSelectedValues, 

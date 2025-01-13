@@ -10,9 +10,9 @@ export const AdPopover: React.FC<AdPopoverProps> = ({
   setSelectedValues,
   selectedValues,
 }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const popoverRef = useRef<HTMLDivElement>(null);
+   const [searchTerm, setSearchTerm] = useState<string>("");
+   const [isOpen, setOpen] = useState<boolean>(false);
+   const popoverRef = useRef<HTMLDivElement>(null);
 
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

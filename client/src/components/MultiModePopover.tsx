@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { MultiModePopoverProps} from '../types';
 
 export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
-  const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, selectedValues}=props;
-  const handleCheckboxChange = (value: string | number) => {
+   const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, selectedValues}=props;
+   const handleCheckboxChange = (value: string | number) => {
     setSelectedValues((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)

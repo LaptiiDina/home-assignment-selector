@@ -3,10 +3,10 @@ import { FormData } from '../types';
 
 
 export const useFormState = () => {
-  const [formData, setFormData] = useState<FormData>({
+   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-  });
+   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
