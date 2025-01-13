@@ -1,5 +1,6 @@
 
 
 export const featureFlags = {
-    isMulti: false,
-  };
+    isMulti: true,
+};
+
