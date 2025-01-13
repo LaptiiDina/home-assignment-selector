@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { SingleModePopoverProps } from '../types';
 
 export const SingleModePopover: FC<SingleModePopoverProps> = (props) => {
-  const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, setOpen}=props;
-  const handleOptionSelect = (value: string | number) => {
+   const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, setOpen}=props;
+   const handleOptionSelect = (value: string | number) => {
     setSelectedValues([value]);
     setOpen(false); 
   };
