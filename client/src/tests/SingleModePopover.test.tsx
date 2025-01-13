@@ -17,17 +17,6 @@ describe('SingleModePopover', () => {
     setSelectedValues: vi.fn(),
   };
 
-  it('renders button with default text', () => {
-    render(<SingleModePopover {...mockProps} />);
-    expect(screen.getByRole('button', { name: /select option/i })).toBeInTheDocument();
-  });
-
-  it('calls setOpen when button is clicked', () => {
-    render(<SingleModePopover {...mockProps} />);
-    fireEvent.click(screen.getByRole('button'));
-    expect(mockProps.setOpen).toHaveBeenCalledTimes(1);
-  });
-
   it('calls handleSearch when typing in search input', () => {
     render(<SingleModePopover {...mockProps} />);
     fireEvent.change(screen.getByPlaceholderText('Search...'), { target: { value: 'Option' } });

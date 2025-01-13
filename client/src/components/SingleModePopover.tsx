@@ -1,15 +1,16 @@
 import { FC } from 'react';
-import {  SingleModePopoverProps } from '../types';
+import { SingleModePopoverProps } from '../types';
 
 export const SingleModePopover: FC<SingleModePopoverProps> = (props) => {
+  const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, setOpen}=props;
   const handleOptionSelect = (value: string | number) => {
-    props.setSelectedValues([value]);
-    props.setOpen(false); 
+    setSelectedValues([value]);
+    setOpen(false); 
   };
 
   return (
     <>
-      {props.isOpen && (
+      {isOpen && (
         <div
           style={{
             position: 'absolute',
@@ -25,9 +26,9 @@ export const SingleModePopover: FC<SingleModePopoverProps> = (props) => {
         >
           <input
             type="text"
-            placeholder={props.placeholder}
-            value={props.searchTerm}
-            onChange={props.handleSearch}
+            placeholder={placeholder}
+            value={searchTerm}
+            onChange={handleSearch}
             style={{
               margin: '5px',
               padding: '5px',
@@ -37,8 +38,8 @@ export const SingleModePopover: FC<SingleModePopoverProps> = (props) => {
             }}
           />
           <div style={{ display: "flex", maxHeight: "150px", padding: "5px", flexDirection: "column", width: "40%" }}>
-            {props.filteredOptions.length > 0 ? (
-              props.filteredOptions.map((option) => (
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => (
                 <button
                 type="button"
                   key={option.value}

@@ -1,29 +1,29 @@
 import { FC } from 'react';
-import { MultiModePopoverProps } from '../types';
+import { MultiModePopoverProps} from '../types';
 
 export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
+  const{isOpen, placeholder, searchTerm, handleSearch, filteredOptions, setSelectedValues, selectedValues}=props;
   const handleCheckboxChange = (value: string | number) => {
-    if (props.selectedValues.includes(value)) {
-      props.setSelectedValues(
-        props.selectedValues.filter((selectedValue) => selectedValue !== value)
-      );
-    } else {
-      props.setSelectedValues([...props.selectedValues, value]);
-    }
+    setSelectedValues((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
+    );
   };
+  
 
   const handleSelectAll = () => {
-    const allValues = props.filteredOptions.map((option) => option.value);
-    props.setSelectedValues(allValues);
+    const allValues = filteredOptions.map((option) => option.value);
+    setSelectedValues(allValues);
   };
 
   const handleDeselectAll = () => {
-    props.setSelectedValues([]);
+    setSelectedValues([]);
   };
 
   return (
     <>
-      {props.isOpen && (
+      {isOpen && (
         <div
           style={{
             position: 'absolute',
@@ -39,9 +39,9 @@ export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
         >
           <input
             type="text"
-            placeholder={props.placeholder}
-            value={props.searchTerm}
-            onChange={props.handleSearch}
+            placeholder={placeholder}
+            value={searchTerm}
+            onChange={handleSearch}
             style={{
               margin: '5px',
               padding: '5px',
@@ -51,8 +51,8 @@ export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
             }}
           />
           <div style={{ maxHeight: '150px', overflowY: 'auto', padding: '5px' }}>
-            {props.filteredOptions.length > 0 ? (
-              props.filteredOptions.map((option) => (
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => (
                 <label
                   key={option.value}
                   style={{
@@ -64,7 +64,7 @@ export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
                 >
                   <input
                     type="checkbox"
-                    checked={props.selectedValues.includes(option.value)}
+                    checked={selectedValues.includes(option.value)}
                     onChange={() => handleCheckboxChange(option.value)}
                     style={{ marginRight: '10px' }}
                   />
@@ -74,7 +74,7 @@ export const MultiModePopover: FC<MultiModePopoverProps> = (props) => {
             ) : (
               <p style={{ textAlign: 'center' }}>No results found</p>
             )}
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', margin: '15px 0 15px'}}>
               <button  type="button" onClick={handleSelectAll} data-testid="select-all-button">Select All</button>
               <button   type="button" onClick={handleDeselectAll} data-testid="deselect-all-button">Deselect All</button>
             </div>
